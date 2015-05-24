@@ -4,6 +4,8 @@
 
 Facade is as minimal as it gets: in essence, it parses a single HTML file, caches it in memory, and on demand will return that HTML file with one string of HTML content injected into one HTML element in the original page.
 
+Read the API documentation at [godoc.org/github.com/outrightmental/go-facade](https://godoc.org/github.com/outrightmental/go-facade)
+
 Facade provides a convenient way to serve a static frontend UI from a backend server.
 
 Use any frontend that builds to a static build output folder for distribution (e.g. [Gulp-Bower-Angular](https://github.com/Swiip/generator-gulp-angular))
