@@ -77,6 +77,8 @@ Testing:
     go get github.com/stretchr/testify/assert
     go test
 
+**Next Up: Keepalive (seconds) before rebuilding cache from distFilePath**
+
 **Next Up: Also inject header tags, e.g. `<title>` and `<description>`**
 
 ### Contributing

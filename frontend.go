@@ -29,7 +29,7 @@ func New(distFilePath string) Frontend {
 	if (err != nil) {
 		panic(err)
 	}
-	fmt.Printf("\n\n%+v\n\n\n",t)
+	fmt.Printf("\n\n%+v\n\n\n",t.Tree)
 	c := Frontend{
 		Template: t,
 	}
