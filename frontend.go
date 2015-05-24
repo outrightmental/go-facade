@@ -4,7 +4,6 @@ package facade
 import (
 	"net/http"
 	"html/template"
-	"fmt"
 )
 
 // A constructor for a piece of middleware.
@@ -18,22 +17,29 @@ type Constructor func(http.Handler) http.Handler
 // the same template.
 type Frontend struct {
 	Template *template.Template
+  distFilePath string
 }
 
 // New creates a new frontend,
 // memorizing the given distfile.
 // New serves no other function,
-// output is only built upon a call to Write().
+// template is only manipulated during a call to Write().
 func New(distFilePath string) Frontend {
 	t, err := template.ParseFiles(distFilePath)
 	if (err != nil) {
 		panic(err)
 	}
-	fmt.Printf("\n\n%+v\n\n\n",t.Tree)
-	c := Frontend{
-		Template: t,
-	}
-//	c.distFilePath = distFilePath
-	// TODO: ingest distFilePath and save beforeContent and afterContent
+	c := Frontend{}
+	c.Template = t
+	c.distFilePath = distFilePath
 	return c
+}
+
+// Write generates output HTML
+// using the memorized Template
+func (Frontend) Write(innerHtml string) (string, error) {
+  // TODO: find the HTML element with `facade` inside the memorized template
+  // TODO: inject the innerHtml and save the outputHtml
+  // TODO: panic any errors
+  return "nothing", nil
 }

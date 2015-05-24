@@ -7,9 +7,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// TODO: test Frontend.New ingest distFilePath and save beforeContent and afterContent
-
-
 // A constructor for middleware
 // that writes its own "tag" into the RW and does nothing else.
 // Useful in checking if a frontend is behaving in the right order.
@@ -28,14 +25,10 @@ var testApp = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
 // Tests creating a new frontend
 func TestNew(t *testing.T) {
-
-	/*
-	// TODO: figure out what to do with this now that we are using frontend_test.html AND move this into on func that all tests can use
-	testBeforeContent := "<html><head><title>Test</title></head><body facade>"
-	testAfterContent := "</body></html>"
-	testTemplate := testBeforeContent + testAfterContent
-	*/
-
 	frontend := New("./frontend_test.html")
 	assert.NotNil(t, frontend.Template)
 }
+
+// TODO: Test new frontend with incorrect HTML file panics
+
+// TODO: Write returns correct output html
