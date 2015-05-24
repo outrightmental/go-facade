@@ -1,9 +1,8 @@
+# Facade 
 
 [![Build Status](https://travis-ci.org/outrightmental/facade.svg?branch=master)](https://travis-ci.org/outrightmental/facade)
 
-# Facade 
-
-**Facade is as minimal as it gets: in essence, it parses a single HTML file, caches it in memory, and on demand will return that HTML file with one string of HTML content injected into one HTML element in the original page.**
+Facade is as minimal as it gets: in essence, it parses a single HTML file, caches it in memory, and on demand will return that HTML file with one string of HTML content injected into one HTML element in the original page.
 
 Facade provides a convenient way to serve a static frontend UI from a backend server.
 
