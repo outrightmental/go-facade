@@ -12,7 +12,7 @@ Use any webserver that allows different URLs to be routed to different files/ser
     
 ### Why?
 
-Separation of concerns, according to [The Unix Philosophy](http://en.wikipedia.org/wiki/Unix_philosophy.
+Separation of concerns, according to [The Unix Philosophy](http://en.wikipedia.org/wiki/Unix_philosophy).
 
 Use [Nginx](http://nginx.org/) for what it's great at.
 
