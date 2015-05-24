@@ -72,6 +72,11 @@ And when it's time to provide the HTTP response:
 
 ### Development
 
+Testing:
+
+    go get github.com/stretchr/testify/assert
+    go test
+
 **Next Up: Also inject header tags, e.g. `<title>` and `<description>`**
 
 ### Contributing
