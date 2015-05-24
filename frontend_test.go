@@ -4,7 +4,6 @@ package facade
 import (
 	"net/http"
 	"testing"
-
 	"github.com/stretchr/testify/assert"
 )
 
@@ -30,12 +29,13 @@ var testApp = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 // Tests creating a new frontend
 func TestNew(t *testing.T) {
 
-	// TODO: move this into on func that all tests can use
+	/*
+	// TODO: figure out what to do with this now that we are using frontend_test.html AND move this into on func that all tests can use
 	testBeforeContent := "<html><head><title>Test</title></head><body facade>"
 	testAfterContent := "</body></html>"
 	testTemplate := testBeforeContent + testAfterContent
+	*/
 
-	frontend := New(testTemplate)
-	assert.Equal(t, frontend.beforeContent, testBeforeContent)
-	assert.Equal(t, frontend.afterContent, testAfterContent)
+	frontend := New("./frontend_test.html")
+	assert.NotNil(t, frontend.Template)
 }

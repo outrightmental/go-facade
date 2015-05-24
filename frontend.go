@@ -1,7 +1,11 @@
 // Package facade provides a convenient way to frontend http handlers.
 package facade
 
-import "net/http"
+import (
+	"net/http"
+	"html/template"
+	"fmt"
+)
 
 // A constructor for a piece of middleware.
 // Some middleware use this constructor out of the box,
@@ -13,8 +17,7 @@ type Constructor func(http.Handler) http.Handler
 // once created, it will always hold
 // the same template.
 type Frontend struct {
-	beforeContent string
-	afterContent string
+	Template *template.Template
 }
 
 // New creates a new frontend,
@@ -22,7 +25,14 @@ type Frontend struct {
 // New serves no other function,
 // output is only built upon a call to Write().
 func New(distFilePath string) Frontend {
-	c := Frontend{}
+	t, err := template.ParseFiles(distFilePath)
+	if (err != nil) {
+		panic(err)
+	}
+	fmt.Printf("\n\n%+v\n\n\n",t)
+	c := Frontend{
+		Template: t,
+	}
 //	c.distFilePath = distFilePath
 	// TODO: ingest distFilePath and save beforeContent and afterContent
 	return c
