@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/outrightmental/go-facade.svg?branch=master)](https://travis-ci.org/outrightmental/go-facade)
 
-Facade is as minimal as it gets: in essence, it parses a single HTML file, caches it in memory, and on demand will return that HTML file with one string of HTML content injected into one HTML element in the original page.
+Facade memorizes one static index.html to use as a minimal site template.
 
 Read the API documentation at [godoc.org/github.com/outrightmental/go-facade](https://godoc.org/github.com/outrightmental/go-facade)
 
