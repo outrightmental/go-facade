@@ -31,4 +31,4 @@ func TestNew(t *testing.T) {
 
 // TODO: Test new frontend with incorrect HTML file panics
 
-// TODO: Write returns correct output html
+// TODO: Render returns correct output html

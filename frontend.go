@@ -23,7 +23,7 @@ type Frontend struct {
 // New creates a new frontend,
 // memorizing the given distfile.
 // New serves no other function,
-// template is only manipulated during a call to Write().
+// template is only manipulated during a call to Render().
 func New(distFilePath string) Frontend {
 	t, err := template.ParseFiles(distFilePath)
 	if (err != nil) {
@@ -35,9 +35,9 @@ func New(distFilePath string) Frontend {
 	return c
 }
 
-// Write generates output HTML
+// Render generates output HTML
 // using the memorized Template
-func (Frontend) Write(innerHtml string) (string, error) {
+func (Frontend) Render(innerHtml string) (string, error) {
   // TODO: find the HTML element with `facade` inside the memorized template
   // TODO: inject the innerHtml and save the outputHtml
   // TODO: panic any errors
