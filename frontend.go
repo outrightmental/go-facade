@@ -1,4 +1,4 @@
-// Package facade provides a convenient way to frontend http handlers.
+// Facade memorizes one static index.html to use as a minimal site template.
 package facade
 
 import (
