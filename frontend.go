@@ -2,6 +2,7 @@
 package facade
 
 import (
+  "io"
 	"net/http"
 	"html/template"
 )
@@ -16,7 +17,7 @@ type Constructor func(http.Handler) http.Handler
 // once created, it will always hold
 // the same template.
 type Frontend struct {
-	Template *template.Template
+	template *template.Template
   distFilePath string
 }
 
@@ -30,16 +31,16 @@ func New(distFilePath string) Frontend {
 		panic(err)
 	}
 	c := Frontend{}
-	c.Template = t
+	c.template = t
 	c.distFilePath = distFilePath
 	return c
 }
 
 // Render generates output HTML
 // using the memorized Template
-func (Frontend) Render(innerHtml string) (string, error) {
+func (f Frontend) Render(w io.Writer, innerHtml string) error {
   // TODO: find the HTML element with `facade` inside the memorized template
   // TODO: inject the innerHtml and save the outputHtml
   // TODO: panic any errors
-  return "nothing", nil
+  return f.template.Execute(w, innerHtml)
 }
