@@ -5,6 +5,7 @@ import (
   "io"
   "io/ioutil"
 	"net/http"
+  "regexp"
 )
 
 // A constructor for a piece of middleware.
@@ -36,9 +37,22 @@ func New(d string) *Frontend {
   }
 }
 
+// RegexReplaceAll modifies the Template HTML, replacing matches of the Regexp
+// with the replacement text repl.  Inside repl, $ signs are interpreted as
+// in Expand, so for instance $1 represents the text of the first submatch.
+func (f *Frontend) RegexReplaceAllString(exp string, repl string) error {
+  r, err := regexp.Compile(exp)
+  if (err != nil) {
+    return err
+  }
+  t := r.ReplaceAllString(string(f.templateHtml), repl)
+  f.templateHtml = []byte(t)
+  return nil
+}
+
 // Render generates output HTML
 // using the memorized Template
-func (f Frontend) Render(w io.Writer, innerHtml string) error {
+func (f *Frontend) Render(w io.Writer, innerHtml []byte) error {
   // TODO: find the HTML element with `facade` inside the memorized template
   // TODO: inject the innerHtml and save the outputHtml
   // TODO: panic any errors
@@ -46,6 +60,6 @@ func (f Frontend) Render(w io.Writer, innerHtml string) error {
   return nil
 }
 
-func (f Frontend) GetTemplateLength() int {
+func (f *Frontend) GetTemplateLength() int {
   return len(f.templateHtml)
 }
