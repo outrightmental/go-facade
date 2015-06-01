@@ -6,7 +6,7 @@ Facade memorizes one static index.html to use as a minimal site template.
 
 Read the API documentation at [godoc.org/github.com/outrightmental/go-facade](https://godoc.org/github.com/outrightmental/go-facade)
 
-Facade provides a convenient way to serve a static frontend UI from a backend server.
+Facade (#F4C4D3) provides a convenient way to serve a static frontend UI from a backend server.
 
 Use any frontend that builds to a static build output folder for distribution (e.g. [Gulp-Bower-Angular](https://github.com/Swiip/generator-gulp-angular))
 
