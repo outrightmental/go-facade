@@ -4,7 +4,7 @@ package facade
 import (
 	"net/http"
 	"testing"
-	"github.com/stretchr/testify/assert"
+	"github.com/outrightmental/go-testify/assert"
 )
 
 // A constructor for middleware
@@ -26,7 +26,7 @@ var testApp = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 // Tests creating a new frontend
 func TestNew(t *testing.T) {
 	frontend := New("./frontend_test.html")
-	assert.NotNil(t, frontend.template)
+	assert.NotNil(t, frontend.GetTemplateLength())
 }
 
 // TODO: Test new frontend with incorrect HTML file panics

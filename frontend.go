@@ -3,8 +3,8 @@ package facade
 
 import (
   "io"
+  "io/ioutil"
 	"net/http"
-	"html/template"
 )
 
 // A constructor for a piece of middleware.
@@ -17,7 +17,7 @@ type Constructor func(http.Handler) http.Handler
 // once created, it will always hold
 // the same template.
 type Frontend struct {
-	template *template.Template
+	templateHtml []byte
   distFilePath string
 }
 
@@ -25,15 +25,15 @@ type Frontend struct {
 // memorizing the given distfile.
 // New serves no other function,
 // template is only manipulated during a call to Render().
-func New(distFilePath string) Frontend {
-	t, err := template.ParseFiles(distFilePath)
+func New(d string) *Frontend {
+	t, err := ioutil.ReadFile(d)
 	if (err != nil) {
 		panic(err)
 	}
-	c := Frontend{}
-	c.template = t
-	c.distFilePath = distFilePath
-	return c
+	return &Frontend{
+    templateHtml: t,
+    distFilePath: d,
+  }
 }
 
 // Render generates output HTML
@@ -42,5 +42,10 @@ func (f Frontend) Render(w io.Writer, innerHtml string) error {
   // TODO: find the HTML element with `facade` inside the memorized template
   // TODO: inject the innerHtml and save the outputHtml
   // TODO: panic any errors
-  return f.template.Execute(w, innerHtml)
+  w.Write(f.templateHtml)
+  return nil
+}
+
+func (f Frontend) GetTemplateLength() int {
+  return len(f.templateHtml)
 }
