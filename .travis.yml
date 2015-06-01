@@ -1,7 +1,8 @@
 language: go
 
 install:
-  - go get github.com/outrightmental/go-testify/assert
+  - go get github.com/stretchr/testify/assert
+  - go get github.com/stretchr/testify/mock
 
 go:
   - 1.1
