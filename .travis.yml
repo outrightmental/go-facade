@@ -1,7 +1,7 @@
 language: go
 
 install:
-  - go get -t
+  - go get github.com/outrightmental/go-testify/assert
 
 go:
   - 1.1
