@@ -39,16 +39,12 @@ That's where Facade comes in. It will serve our same `index.html` *for every URL
     <!doctype html>
     <html>
       <head>
-        <title>Freshest</title>
+        <title>Facade will replace this</title>
         <link rel="stylesheet" href="/styles/vendor-f18be9e6.css">
         <link rel="stylesheet" href="/styles/app-25ab4bd1.css">
       </head>
       <body ng-app="freshest" ng-controller="MainCtrl">
-        <div facade ui-view=""><!-- 
-
-            **go-facade injects content into here!**
-
-        --></div>
+        <div ui-view=""><facade/><!-- <- Facade will replace this --></div>
         <script src="/scripts/vendor-23555feb.js"></script>
         <script src="/scripts/app-e39a84b8.js"></script>
       </body>
@@ -60,17 +56,20 @@ So when our user visits
 
 Nginx passes the request through to our Go webserver- perhaps [Gorilla Mux](http://www.gorillatoolkit.org/pkg/mux) -actions are performed silently, followed by the construction of our Go service's HTTP Response.
 
-    distPath := Getenv('PATH_TO_FRONTEND_INDEX_DOT_HTML')
+    distPath := Getenv("PATH_TO_FRONTEND_INDEX_DOT_HTML")
     frontend := facade.New(distPath)
-
-Our frontend has been built via any method, and Facade is configured to see only its final built distribution.
+    frontend.PreReplaceAll("../bower_components","/bower_components")
+    frontend.WillReplaceAll("title","<title>([^<]*)</title>","<title>%s</title>")
+    frontend.WillReplaceAll("content","<facade/>","%s")
 
 And when it's time to provide the HTTP response:
 
-    content := "<p>This will be injected into the HTML element in our page with the attribute `facade`</p>"
     responsewriter.Header().Set( "Content-Type", "text/html")
     responsewriter.WriteHeader( result.Code)
-    fmt.Fprint( responsewriter, frontend.Write(content))
+    frontend.Write(responsewriter, facade.Casing{
+      "title":"Freshest",
+      "content":"<p>This will be replace the <facade/> element in our page</p>"
+      })
 
 ### Development
 
