@@ -34,7 +34,7 @@ Our user requests a particular URL, and the webserver (e.g. [Nginx](http://nginx
   1. Searches in the frontend's static build output folder for distribution, to see if the requested URL matches an exact file. For example, `/` (matches `index.html`) or `/scripts/app-ddf26c4d.js` or `/styles/vendor-f18be9e6.css` or `/assets/images/logo.png`. If a match is found, the HTTP request is terminated here, by serving the static file.
   2. If no static file is found, pass the request through to the Go webservice ***with the URL completely intact***.
 
-That's where Facade comes in. It will serve our same `index.html` *for every URL that it encounters*, with one twist. Inside of our `index.html` is an HTML element with a special attribute, `facade`. For example:
+That's where Facade comes in. It will serve our same `index.html` *for every URL that it encounters*, with one twist. Inside of our `index.html` we can configure a set of replacements to be executed at Write time. For example:
 
     <!doctype html>
     <html>
